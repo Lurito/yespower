@@ -1,0 +1,1 @@
+Generates Yespower hash for Tidecoin.

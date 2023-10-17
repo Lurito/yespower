@@ -1,9 +1,13 @@
 [package]
 name = "rust-yespower"
 version = "0.1.0"
+authors = ["Yar <idquantum@gmail.com>"]
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+description = "Generate a yespower pow hash for Tidecoin."
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/yarsawyer/rust-yespower"
+keywords = ["yespower", "tidecoin"]
 
 [dependencies]
 libc = "0.2"
