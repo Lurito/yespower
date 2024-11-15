@@ -1,12 +1,12 @@
 [package]
 name = "rust-yespower"
-version = "0.1.0"
-authors = ["Yar <idquantum@gmail.com>"]
+version = "0.1.1"
+authors = ["Yar <idquantum@gmail.com>", "Ayrzo <ayrzo@lurito.cn>"]
 edition = "2021"
-description = "Generate a yespower pow hash for Tidecoin."
+description = "Generate yespower PoW hashs."
 license = "MIT"
 readme = "README.md"
-repository = "https://github.com/yarsawyer/rust-yespower"
+repository = "https://github.com/Lurito/rust-yespower"
 keywords = ["yespower", "tidecoin"]
 
 [dependencies]
