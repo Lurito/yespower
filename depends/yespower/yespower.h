@@ -54,7 +54,15 @@ typedef yespower_region_t yespower_local_t;
 /*
  * Type for yespower algorithm version numbers.
  */
-typedef enum { YESPOWER_0_5 = 5, YESPOWER_1_0 = 10 } yespower_version_t;
+typedef enum {
+	YESPOWER_0_5 = 5,
+	YESPOWER_1_0 = 10
+} yespower_enum_t;
+
+#define YESPOWER_0_5_U32 ((uint32_t)YESPOWER_0_5)
+#define YESPOWER_1_0_U32 ((uint32_t)YESPOWER_1_0)
+
+typedef uint32_t yespower_version_t;
 
 /**
  * yespower parameters combined into one struct.
@@ -111,6 +119,10 @@ extern int yespower(yespower_local_t *local,
     const uint8_t *src, size_t srclen,
     const yespower_params_t *params, yespower_binary_t *dst);
 
+extern int yespower_b2b(yespower_local_t *local,
+    const uint8_t *src, size_t srclen,
+    const yespower_params_t *params, yespower_binary_t *dst);
+
 /**
  * yespower_tls(src, srclen, params, dst):
  * Compute yespower(src[0 .. srclen - 1], N, r), to be checked for "< target".
@@ -123,11 +135,23 @@ extern int yespower(yespower_local_t *local,
 extern int yespower_tls(const uint8_t *src, size_t srclen,
     const yespower_params_t *params, yespower_binary_t *dst);
 
+extern int yespower_b2b_tls(const uint8_t *src, size_t srclen,
+    const yespower_params_t *params, yespower_binary_t *dst);
 
-/* 
- * yespower for tidecoin
- */
-extern int yespower_hash(const char *input, char *output);
+void yespower_hash(const char* input, char* output);
+void yespowerIC_hash(const char* input, char* output);
+void yespowerIOTS_hash(const char* input, char* output);
+void yespowerLTNCG_hash(const char* input, char* output, uint32_t len);
+void yespowerR16_hash(const char* input, char* output);
+void yespowerRES_hash(const char* input, char* output);
+void yespowerSUGAR_hash(const char* input, char* output);
+void yespowerURX_hash(const char* input, char* output, uint32_t len);
+void yespowerLITB_hash(const char* input, char* output, uint32_t len);
+void yespowerTIDE_hash(const char* input, char* output, uint32_t len);
+void cpupower_hash(const char* input, char* output, uint32_t len);
+void power2b_hash(const char* input, char* output, uint32_t len);
+void yespowerMGPC_hash(const char* input, char* output, uint32_t len);
+void yespowerARWN_hash(const char* input, char* output, uint32_t len);
 
 #ifdef __cplusplus
 }

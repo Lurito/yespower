@@ -14,10 +14,9 @@ fn main() {
         let obj_ext_name = if cfg!(target_os = "windows") { "obj" } else { "o" };
 
         // Create the output directory if it doesn't exist
-        let lib_out_dir_path = PathBuf::from(lib_out_dir);
-        if !lib_out_dir_path.exists() {
-            let _ = std::fs::create_dir_all(&lib_out_dir_path);
-        }
+        // Since the next level directory `crypto` will also be used, so we need to create it
+        let lib_out_dir_path = PathBuf::from(format!("{}/crypto", lib_out_dir));
+        let _ = std::fs::create_dir_all(&lib_out_dir_path);
 
         fn build_lib_to_obj(name: &str, crate_dir: &str, lib_dir: &str, lib_out_dir: &str, obj_ext_name: &str) {
             let output_name = &format!("{}/{}.{}", lib_out_dir, name, obj_ext_name);
@@ -50,8 +49,9 @@ fn main() {
         }
 
         // Compile the necessary components
-        build_lib_to_obj("yespower-opt", crate_dir, lib_dir, lib_out_dir, obj_ext_name);
-        build_lib_to_obj("sha256", crate_dir, lib_dir, lib_out_dir, obj_ext_name);
+        build_lib_to_obj("yespower-blake2b", crate_dir, lib_dir, lib_out_dir, obj_ext_name);
+        build_lib_to_obj("yespower-combined", crate_dir, lib_dir, lib_out_dir, obj_ext_name);
+        build_lib_to_obj("crypto/blake2b-yp", crate_dir, lib_dir, lib_out_dir, obj_ext_name);
 
         let output_lib_name = &match env::consts::OS {
             "linux" => format!("{}/libyespower.a", lib_out_dir),
@@ -67,8 +67,9 @@ fn main() {
                     "ar",
                     "rcs",
                     output_lib_name,
-                    &format!("{}/{}.{}", lib_out_dir, "yespower-opt", obj_ext_name),
-                    &format!("{}/{}.{}", lib_out_dir, "sha256", obj_ext_name),
+                    &format!("{}/{}.{}", lib_out_dir, "yespower-blake2b", obj_ext_name),
+                    &format!("{}/{}.{}", lib_out_dir, "yespower-combined", obj_ext_name),
+                    &format!("{}/{}.{}", lib_out_dir, "crypto/blake2b-yp", obj_ext_name),
                 ])
                 .status()
                 .expect("failed to link libs");

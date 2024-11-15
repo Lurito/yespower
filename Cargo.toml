@@ -1,13 +1,17 @@
 [package]
 name = "rust-yespower"
-version = "0.1.1"
-authors = ["Yar <idquantum@gmail.com>", "Ayrzo <ayrzo@lurito.cn>"]
+version = "0.2.0"
+authors = ["Ayrzo <ayrzo@lurito.cn>", "Yar <idquantum@gmail.com>"]
 edition = "2021"
 description = "Generate yespower PoW hashs."
 license = "MIT"
 readme = "README.md"
 repository = "https://github.com/Lurito/rust-yespower"
-keywords = ["yespower", "tidecoin"]
+keywords = ["yespower", "tidecoin", "power2b"]
+
+[lib]
+name = "rust-yespower"
+path = "src/lib.rs"
 
 [dependencies]
 libc = "0.2"

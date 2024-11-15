@@ -1,40 +1,24 @@
-extern crate libc;
-use libc::c_char;
+#![allow(non_upper_case_globals, non_camel_case_types, non_snake_case, improper_ctypes, dead_code)]
 
-include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
+mod yespower;
 
+pub use yespower::yespower_tls;
+pub use yespower::yespower_b2b_tls;
+pub use yespower::yespower_params_t;
+pub use yespower::yespower_binary_t;
+pub use yespower::YESPOWER_1_0;
 
-pub fn hash(input: &[u8; 80]) -> Result<[u8; 32], &'static str> {
-    let mut output = [0u8; 32];
-    
-    let result = unsafe {
-        yespower_hash(input.as_ptr() as *const c_char, output.as_mut_ptr() as *mut c_char)
-    };
-
-    if result == 0 {
-        Ok(output)
-    } else {
-        Err("Failed to compute yespower hash")
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-    use hex;
-
-    #[test]
-    fn test_hash() {
-        let input_hex = "0000002009f42768de3cfb4e58fc56368c1477f87f60e248d7130df3fb8acd7f6208b83a72f90dd3ad8fe06c7f70d73f256f1e07185dcc217a58b9517c699226ac0297d2ad60ba61b62a021d9b7700f0";
-        let expected_output_hex = "9d90c21b5a0bb9566d2999c5d703d7327ee3ac97c020d387aa2dfd0700000000";
-
-        let input_bytes: [u8; 80] = hex::decode(input_hex).expect("Decoding failed").try_into().expect("Incorrect input length");
-        let expected_output_bytes: [u8; 32] = hex::decode(expected_output_hex).expect("Decoding failed").try_into().expect("Incorrect output length");
-        
-        match hash(&input_bytes) {
-            Ok(output) => assert_eq!(output, expected_output_bytes),
-            Err(e) => panic!("Hashing failed: {}", e),
-        }
-
-    }
-}
+pub use yespower::yespower_hash;
+pub use yespower::yespowerIC_hash;
+pub use yespower::yespowerIOTS_hash;
+pub use yespower::yespowerLTNCG_hash;
+pub use yespower::yespowerR16_hash;
+pub use yespower::yespowerRES_hash;
+pub use yespower::yespowerSUGAR_hash;
+pub use yespower::yespowerURX_hash;
+pub use yespower::yespowerLITB_hash;
+pub use yespower::yespowerTIDE_hash;
+pub use yespower::cpupower_hash;
+pub use yespower::power2b_hash;
+pub use yespower::yespowerMGPC_hash;
+pub use yespower::yespowerARWN_hash;
