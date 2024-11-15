@@ -10,8 +10,6 @@ repository = "https://github.com/Lurito/rust-yespower"
 keywords = ["yespower", "tidecoin", "power2b"]
 
 [lib]
-name = "rust-yespower"
-path = "src/lib.rs"
 
 [dependencies]
 libc = "0.2"
