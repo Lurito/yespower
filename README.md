@@ -1,1 +1,3 @@
-Generates Yespower hash for Tidecoin.
+Generate yespower PoW hashs.
+
+Dependencies: zig compilation environment.
