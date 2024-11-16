@@ -1,6 +1,6 @@
 #![allow(non_snake_case)]
 
-use rust_yespower::*;
+use yespower::*;
 
 #[cfg(test)]
 mod yespower_hash_test {
